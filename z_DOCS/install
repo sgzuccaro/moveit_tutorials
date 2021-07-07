@@ -1,0 +1,39 @@
+follows instructions from: https://github.com/PickNikRobotics/ros_control_boilerplate
+
+    git clone https://github.com/ros-simulation/gazebo_ros_demos.git
+    sudo apt-get install ros-kinetic-ros-control-boilerplate 
+    
+    # 
+    sudo apt-get install ros-kinetic-rosparam-shortcuts
+
+    git clone https://github.com/PickNikRobotics/ros_control_boilerplate.git
+    
+    # install gflag library
+    sudo apt-get install libgflags-dev
+
+    # rrbot with moveit
+    git clone https://github.com/carlosjoserg/rrbot.git
+    
+
+
+notes:
+- issue 1) use the group in launch file to put everything in the same namespace. for example, move_group and robot_state_publisher" need to be in the same namespace for /joint_states topic to match. otherwhise one will be /robot/joint_states
+
+- issue 2) /joint_states shows joints in the "wrong" order. i.e. not order specified in urdf or configs. this is not a issue, this they are just alphebetical as it intends
+
+- issue 3) "Parameter '~moveit_controller_manager' not specified. This is needed to identify the plugin to use for interacting with con
+aths can be executed" this is because at aubo_moveit_config/launch/aubo_i5_moveit_controller_manager.launch.xml is empty by default but needs to specify the controller aubo_i5_moveit_controller_manager
+<launch>  
+<rosparam file="$(find <robot>_moveit_config)/config/controllers.yaml"/>  
+<param name="use_controller_manager" value="false"/>  
+<param name="trajectory_execution/execution_duration_monitoring" value="false"/>  
+ <param name="moveit_controller_manager"  value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>  
+</launch>
+
+- issue 4) "No controller_list specified"
+
+
+
+
+REFERENCES
+- https://answers.ros.org/question/215400/moveit-with-rrbot/

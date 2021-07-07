@@ -1,0 +1,31 @@
+
+# Publish all joint states ----------------------------------
+# Creates the /joint_states topic necessary in ROS
+joint_state_controller:
+  type:         joint_state_controller/JointStateController
+  publish_rate: 50
+
+# Joint Trajectory Controller -------------------------------
+# For detailed explanations of parameter see http://wiki.ros.org/joint_trajectory_controller
+position_trajectory_controller:
+  type: position_controllers/JointTrajectoryController
+  # These joints can likely just be copied from the hardware_interface list above
+  joints:
+    - shoulder_joint
+    - upperArm_joint
+    - foreArm_joint
+    - wrist1_joint
+    - wrist2_joint
+    - wrist3_joint
+
+# Group Position Controllers ---------------------------------------
+# Allows to send single ROS msg of Float64MultiArray to all joints
+#joint_position_controller:
+#   type: position_controllers/JointGroupPositionController
+#   joints:
+#      - shoulder_joint
+#      - upperArm_joint
+#      - foreArm_joint
+#      - wrist1_joint
+#      - wrist2_joint
+#      - wrist3_joint

@@ -1,0 +1,18 @@
+generic_hw_control_loop:
+  loop_hz: 300
+  cycle_time_error_threshold: 0.01
+
+
+# Settings for ros_control hardware interface
+hardware_interface:
+  loop_hz: 10 # hz
+  # CR: Here is my point, can the urdf/transmission specification be used for joint names?
+  joints:
+    - shoulder_joint
+    - upperArm_joint
+    - foreArm_joint
+    - wrist1_joint
+    - wrist2_joint
+    - wrist3_joint
+
+  sim_control_mode: 0 # 0: position, 1: velocity

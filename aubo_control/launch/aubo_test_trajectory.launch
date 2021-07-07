@@ -1,0 +1,11 @@
+ 
+<launch>
+  
+    <!-- Load hardware interface -->
+    <node name="test_trajectory" pkg="ros_control_boilerplate" type="test_trajectory" output="screen">
+      <param name="trajectory_controller" value="position_trajectory_controller"/>
+      <rosparam file="$(find aubo_control)/cfg/aubo_controllers.yaml" command="load"/>
+    </node>
+ 
+
+</launch>

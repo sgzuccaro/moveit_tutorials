@@ -44,8 +44,8 @@ find_package(catkin REQUIRED COMPONENTS message_generation cmake_modules hardwar
 
 ## Generate messages in the 'msg' folder
 add_message_files(FILES
-  cmd.msg
-  telem.msg
+  armCmd.msg
+  auboTelemetry.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -129,5 +129,14 @@ add_executable(aubo_sim_echo
 )
 add_dependencies(aubo_sim_echo ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(aubo_sim_echo
+  ${catkin_LIBRARIES}
+)
+
+
+add_executable(watchdog_signal
+  src/watchdog_signal.cpp
+)
+add_dependencies(watchdog_signal ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(watchdog_signal
   ${catkin_LIBRARIES}
 )

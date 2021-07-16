@@ -2,7 +2,7 @@
 # Settings for ros_control control loop
 
 generic_hw_control_loop:
-  loop_hz: 300
+  loop_hz: 200
   cycle_time_error_threshold: 0.01
 
 # Settings for ros_control hardware interface
@@ -21,7 +21,7 @@ hardware_interface:
 # Creates the /joint_states topic necessary in ROS
 joint_state_controller:
    type: joint_state_controller/JointStateController
-   publish_rate: 50
+   publish_rate: 200
 
 # Joint Trajectory Controller -------------------------------
 # For detailed explanations of parameter see http://wiki.ros.org/joint_trajectory_controller

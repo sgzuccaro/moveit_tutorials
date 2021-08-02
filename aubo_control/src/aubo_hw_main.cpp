@@ -15,12 +15,12 @@ int main(int argc, char** argv)
   // Create the hardware interface specific to your robot
   std::shared_ptr<aubo_control_ns::auboHWInterface> aubo_hw_interface_instance 
    (new aubo_control_ns::auboHWInterface(nh));
-  aubo_hw_interface_instance->init();
+  aubo_hw_interface_instance->init(); // size and register required interfaces inside generic_hw_interface.cpp
 
 
   // Start the control loop
   ros_control_boilerplate::GenericHWControlLoop control_loop(nh, aubo_hw_interface_instance);
-  control_loop.run(); // Blocks until shutdown signal recieved
+  control_loop.run(); // Blocks until shutdown signal recieved -> read -> update -> write -> repeat inside generic_hw_control_loop.cpp
 
   return 0;
 }

@@ -12,7 +12,7 @@ auboHWInterface::auboHWInterface(ros::NodeHandle &nh, urdf::Model *urdf_model)
 
   telemetry_sub = nh.subscribe("/teensy/auboTelemetry", 1, &auboHWInterface::telemetryCallback, this);
 
-  cmd_pub= nh.advertise<aubo_control::armCmd>("/teensy/armCmd", 1);
+  cmd_pub= nh.advertise<aubo_control::armCmd>("/teensy/armCmd", 3);
   ROS_INFO("auboHWInterface declared.");
 }
 
@@ -36,6 +36,8 @@ void auboHWInterface::telemetryCallback(const aubo_control::auboTelemetry::Const
       joint_position_[i] = msg->angle[i]*DEG_TO_RAD;
     }
 
+ 
+
 }
 
 
@@ -57,7 +59,7 @@ void auboHWInterface::init()
 
 void auboHWInterface::read(ros::Duration &elapsed_time)
 {
-  ros::spinOnce(); // fire callback telem
+  //ros::spinOnce();is not required here because of asyncspinner
  
 }
 
@@ -80,12 +82,14 @@ void auboHWInterface::write(ros::Duration &elapsed_time)
 
   for(int i=0; i<num_joints_; i++){
     cmd_.angle[i]=joint_position_command_[i]*RAD_TO_DEG;
-    cmd_.vel[i]=joint_velocity_command_[i]*RAD_TO_DEG; ////((joint_position_command_[i]-joint_position_prev_[i])*RAD_TO_DEG)/0.005; // joint_velocity_command_[i] calculate my own velocities
-    //cmd_.eff[i]=joint_effort_command_[i];
+    cmd_.vel[i]= ((joint_position_command_[i]-joint_position_prev_[i])*RAD_TO_DEG)/elapsed_time.toSec(); // joint_velocity_command_[i]*RAD_TO_DEG; joint_velocity_command_[i] calculate my own velocities
+    cmd_.accel[i]=4; // a max acceleration limit
+    
+    //cmd_.eff[i]=joint_effort_command_[i]; 
 
     joint_position_prev_[i]=joint_position_command_[i];
   }
-
+ 
   cmd_pub.publish(cmd_);
 
 }

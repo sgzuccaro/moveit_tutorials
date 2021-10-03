@@ -80,17 +80,30 @@ void auboHWInterface::write(ros::Duration &elapsed_time)
   std::vector<double> joint_effort_command_;
   */
 
+  // only publish a msg if it has a change
+  bool change_detected=false;
   for(int i=0; i<num_joints_; i++){
-    cmd_.angle[i]=joint_position_command_[i]*RAD_TO_DEG;
-    cmd_.vel[i]= ((joint_position_command_[i]-joint_position_prev_[i])*RAD_TO_DEG)/elapsed_time.toSec(); // joint_velocity_command_[i]*RAD_TO_DEG; joint_velocity_command_[i] calculate my own velocities
-    cmd_.accel[i]=4; // a max acceleration limit
-    
-    //cmd_.eff[i]=joint_effort_command_[i]; 
-
-    joint_position_prev_[i]=joint_position_command_[i];
+    if(joint_position_prev_[i] != joint_position_command_[i]){
+      change_detected=true;
+      i=num_joints_; // exit loop
+    }
   }
- 
-  cmd_pub.publish(cmd_);
+
+  // if a new msg is available then send it
+  if(change_detected){
+    for(int i=0; i<num_joints_; i++){
+      cmd_.angle[i]=joint_position_command_[i]*RAD_TO_DEG;
+      cmd_.vel[i]= ((joint_position_command_[i]-joint_position_prev_[i])*RAD_TO_DEG)/elapsed_time.toSec(); // joint_velocity_command_[i]*RAD_TO_DEG; joint_velocity_command_[i] calculate my own velocities
+      cmd_.accel[i]=4; // a max acceleration limit
+      
+      //cmd_.eff[i]=joint_effort_command_[i]; 
+
+      joint_position_prev_[i]=joint_position_command_[i];
+    }
+  
+    cmd_.msg_ctr=cmd_.msg_ctr+1;
+    cmd_pub.publish(cmd_);
+  }
 
 }
 

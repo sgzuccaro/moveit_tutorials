@@ -20,7 +20,7 @@
     <!-- Load hardware interface -->
     <node name="aubo_hw_main" pkg="aubo_control" type="aubo_hw_main" output="screen"/> 
 
-
+        <!-- simualte a robot -->
     <node name="aubo_sim_echo" pkg="aubo_control" type="aubo_sim_echo" output="screen"/>
 
 

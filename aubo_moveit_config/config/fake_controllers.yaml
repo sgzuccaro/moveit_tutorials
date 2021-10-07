@@ -7,3 +7,6 @@ controller_list:
       - wrist1_joint
       - wrist2_joint
       - wrist3_joint
+  - name: fake_gripper_controller
+    joints:
+      - gripper_finger_joint1

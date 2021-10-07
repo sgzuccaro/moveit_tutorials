@@ -140,3 +140,5 @@ add_dependencies(watchdog_signal ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EX
 target_link_libraries(watchdog_signal
   ${catkin_LIBRARIES}
 )
+
+

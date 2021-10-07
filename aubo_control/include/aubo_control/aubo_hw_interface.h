@@ -8,7 +8,7 @@
 
 #define DEG_TO_RAD 0.01745329251
 #define RAD_TO_DEG 57.2957795131
-
+#define DESIRED_BUFFERED_POINTS 12
 
 namespace aubo_control_ns
 {
@@ -41,6 +41,7 @@ protected:
 
   ros::Publisher cmd_pub;
   std::vector<double> joint_position_prev_;
+  int bufferHealth=0;
 
 };  // class
 

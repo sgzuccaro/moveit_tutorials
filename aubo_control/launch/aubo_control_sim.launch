@@ -4,7 +4,7 @@
  <!-- RVIZ  -->
    
     <!-- Load the URDF to the parameter server -->
-    <param name="robot_description" textfile="$(find aubo_description)/urdf/aubo_i5.urdf.xacro"/>
+    <param name="robot_description" textfile="$(find aubo_description)/urdf/aubo_i5_with_gripper.urdf"/>
 
 
     <!-- Show in Rviz  -->
@@ -54,6 +54,9 @@
     </include>
 
  
-
+    <!-- gripper -->
+ <node pkg="tf" type="static_transform_publisher" name="left_gripper_pose_publisher" args="0 0.02 0.0584 0 0  0 gripper_hand panda_leftfinger 10"/>
+ <node pkg="tf" type="static_transform_publisher" name="right_gripper_pose_publisher" args="0 -0.02 0.0584 0 0  0 gripper_hand panda_rightfinger 10"/>
+ 
 
 </launch>

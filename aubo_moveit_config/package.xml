@@ -5,8 +5,8 @@
   <description>
      An automatically generated package with all the configuration and launch files for using the aubo_i5 with the MoveIt! Motion Planning Framework
   </description>
-  <author email="sgz@gmail.com">stephen</author>
-  <maintainer email="sgz@gmail.com">stephen</maintainer>
+  <author email="sz@gmail.com">sz</author>
+  <maintainer email="sz@gmail.com">sz</maintainer>
 
   <license>BSD</license>
 

@@ -1,0 +1,55 @@
+make sure to have the following dependencies:
+roscpp moveit_msgs moveit_visual_tools moveit_ros_planning_interface
+
+note that "moveit" is not a dependency directly, only its subpackages
+
+
+
+when trying to run motion_test_v1 (with moveit_visual_tools) i get error :
+error loading the libmoveit_planning_scene_monitor.so.0.9.18
+
+
+
+move_group interface API (helpful to be familar)
+http://docs.ros.org/en/melodic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1MoveGroupInterface.html#details
+
+guide to cartesian planners:
+https://picknik.ai/cartesian%20planners/moveit/motion%20planning/2021/01/07/guide-to-cartesian-planners-in-moveit.html
+
+
+move group usage
+
+you can create joint space goals and cartesian goals. cartesian goals can be reaching using joint space or linear motion.
+
+Joint space goal:
+    move_group.setJointValueTarget(current_joint_states);
+    move_group.move();
+
+Cartesian goal:
+    move_group.setPoseTarget(store_pose); 
+    move_group.move();
+
+
+Linear trajectory:
+    move_group.computeCartesianPath(waypoints, 0.005, 0.0, trajectory, true);
+    plan.trajectory_=trajectory;
+    move_group.execute(plan);
+
+
+
+
+ADDING EEF
+copied panda urdf gripper section
+https://github.com/ros-planning/moveit_resources/blob/master/panda_description/urdf/panda.urdf
+
+i pasted this into the aubo_i5_with_gripper.urdf i created.
+had to adjust offset and make sure urdf mesh file paths were correct
+
+then followed setup assistant guide (had to delete old moveit config):
+http://docs.ros.org/en/kinetic/api/moveit_tutorials/html/doc/setup_assistant/setup_assistant_tutorial.html#step-6-label-end-effectors
+
+with the nex config i had to rewrite aubo_i5_moveit_controller_manager.launch.xml and controllers.yaml. these are the only two customized files from moveit config.
+
+also had to add static transform publishes to the launch file to create the frames for the gripper fingers. i think this means robot_state_publisher does not handle the gripper.
+
+ 

@@ -1,11 +1,11 @@
 moveit_setup_assistant_config:
   URDF:
     package: aubo_description
-    relative_path: urdf/aubo_i5.urdf
+    relative_path: urdf/aubo_i5_with_gripper.urdf
     xacro_args: "--inorder "
   SRDF:
     relative_path: config/aubo_i5.srdf
   CONFIG:
-    author_name: stephen
-    author_email: sgz@gmail.com
-    generated_timestamp: 1607007188
+    author_name: sz
+    author_email: sz@gmail.com
+    generated_timestamp: 1633298825

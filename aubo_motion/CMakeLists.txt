@@ -33,7 +33,7 @@ project(aubo_motion)
 ##     * add a exec_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
 ##   * add "message_generation" and every package in MSG_DEP_SET to
-find_package(catkin REQUIRED COMPONENTS roscpp moveit_msgs moveit_visual_tools moveit_ros_planning_interface)
+find_package(catkin REQUIRED COMPONENTS roscpp moveit_msgs moveit_visual_tools trajectory_msgs moveit_ros_planning_interface)
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
 ##     catkin_package(CATKIN_DEPENDS ...)
 ##   * uncomment the add_*_files sections below as needed
@@ -202,22 +202,22 @@ include_directories(
 # catkin_add_nosetests(test)
 
 
-add_executable(movegroup_cartesian_square
-  src/movegroup_cartesian_square.cpp
-)
-add_dependencies(movegroup_cartesian_square ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(movegroup_cartesian_square
-  ${catkin_LIBRARIES}
-)
+# add_executable(movegroup_cartesian_square
+#   src/movegroup_cartesian_square.cpp
+# )
+# add_dependencies(movegroup_cartesian_square ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# target_link_libraries(movegroup_cartesian_square
+#   ${catkin_LIBRARIES}
+# )
 
 
-add_executable(movegroup_jointspace
-  src/movegroup_jointspace.cpp
-)
-add_dependencies(movegroup_jointspace ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(movegroup_jointspace
-  ${catkin_LIBRARIES}
-)
+ add_executable(movegroup_jointspace
+   src/movegroup_jointspace.cpp
+ )
+ add_dependencies(movegroup_jointspace ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ target_link_libraries(movegroup_jointspace
+   ${catkin_LIBRARIES}
+ )
 
 add_executable(movegroup_RPY
   src/movegroup_RPY.cpp

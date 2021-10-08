@@ -59,7 +59,7 @@ void auboHWInterface::init()
 
 void auboHWInterface::read(ros::Duration &elapsed_time)
 {
-  //ros::spinOnce();is not required here because of asyncspinner
+  //ros::spinOnce(); //is not required here because of asyncspinner
  
 }
 
@@ -98,8 +98,8 @@ void auboHWInterface::write(ros::Duration &elapsed_time)
   if(change_detected){
     for(int i=0; i<num_joints_; i++){
       cmd_.angle[i]=joint_position_command_[i]*RAD_TO_DEG;
-      cmd_.vel[i]= ((joint_position_command_[i]-joint_position_prev_[i])*RAD_TO_DEG)/elapsed_time.toSec(); // joint_velocity_command_[i]*RAD_TO_DEG; joint_velocity_command_[i] calculate my own velocities
-      cmd_.accel[i]=4; // a max acceleration limit
+      cmd_.vel[i]= (fabs(joint_position_command_[i]-joint_position_prev_[i])*RAD_TO_DEG)/elapsed_time.toSec(); // (must be positive for aubo) joint_velocity_command_[i]*RAD_TO_DEG; joint_velocity_command_[i] calculate my own velocities
+      cmd_.accel[i]=4*RAD_TO_DEG; // a max acceleration limit (must be positive for aubo)
 
       
       //cmd_.eff[i]=joint_effort_command_[i]; 

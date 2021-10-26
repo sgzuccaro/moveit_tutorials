@@ -35,4 +35,37 @@ position_trajectory_controller:
       - wrist1_joint
       - wrist2_joint
       - wrist3_joint
-  
+
+# Group Position Controllers ---------------------------------------
+# Allows to send single ROS msg of Float64MultiArray to all joints
+joint_position_controller:
+   type: position_controllers/JointGroupPositionController
+   joints:
+      - shoulder_joint
+      - upperArm_joint
+      - foreArm_joint
+      - wrist1_joint
+      - wrist2_joint
+      - wrist3_joint
+
+
+# rostopic pub /joint_position_controller/command std_msgs/Float64MultiArray "layout:
+#   dim:
+#   - label: ''
+#     size: 2
+#     stride: 0
+#   data_offset: 0
+# data: [1.5,1.5,1.5,1.5,1.5,1.5]"
+
+
+
+# # Individual Position Controllers ---------------------------------------
+# # Allows to send individual ROS msg of Float64 to each joint separately
+# joint1_position_controller:
+#    type: position_controllers/JointPositionController
+#    joint: joint1
+#    pid: {p: 100.0, i: 0.01, d: 10.0}
+# joint2_position_controller:
+#    type: position_controllers/JointPositionController
+#    joint: joint2
+#    pid: {p: 100.0, i: 0.01, d: 10.0}

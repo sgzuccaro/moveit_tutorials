@@ -202,13 +202,13 @@ include_directories(
 # catkin_add_nosetests(test)
 
 
-# add_executable(movegroup_cartesian_square
-#   src/movegroup_cartesian_square.cpp
-# )
-# add_dependencies(movegroup_cartesian_square ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-# target_link_libraries(movegroup_cartesian_square
-#   ${catkin_LIBRARIES}
-# )
+add_executable(movegroup_cartesian_square
+  src/movegroup_cartesian_square.cpp
+)
+add_dependencies(movegroup_cartesian_square ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(movegroup_cartesian_square
+  ${catkin_LIBRARIES}
+)
 
 
  add_executable(movegroup_jointspace
@@ -240,5 +240,13 @@ add_executable(jointspeed_testing
 )
 add_dependencies(jointspeed_testing ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(jointspeed_testing
+  ${catkin_LIBRARIES}
+)
+
+add_executable(planning_scene_primatives
+  src/planning_scene_primatives.cpp
+)
+add_dependencies(planning_scene_primatives ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(planning_scene_primatives
   ${catkin_LIBRARIES}
 )

@@ -32,12 +32,14 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
 
- 
+     <!-- Load scene -->
+    <node name="planning_scene_primatives" pkg="aubo_motion" type="planning_scene_primatives" output="screen"/> 
+
  <!-- MOVEIT -->
 
 
     <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
-    <include file="$(find aubo_moveit_config)/launch/planning_context.launch">
+    <include file="$(find aubo_i5_moveit_config)/launch/planning_context.launch">
     <arg name="load_robot_description" value="true"/>
     </include>
 
@@ -46,17 +48,12 @@
   <remap from="/joint_trajectory_action" to="/position_trajectory_controller/follow_joint_trajectory"/>
   
 
-    <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
-    <include file="$(find aubo_moveit_config)/launch/move_group.launch">
+    <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default)  -->
+    <include file="$(find aubo_i5_moveit_config)/launch/move_group.launch">
     <arg name="allow_trajectory_execution" value="true"/>
     <arg name="fake_execution" value="false"/>
     <arg name="info" value="true"/> 
     </include>
 
- 
-    <!-- gripper -->
- <node pkg="tf" type="static_transform_publisher" name="left_gripper_pose_publisher" args="0 0.02 0.0584 0 0  0 gripper_hand panda_leftfinger 10"/>
- <node pkg="tf" type="static_transform_publisher" name="right_gripper_pose_publisher" args="0 -0.02 0.0584 0 0  0 gripper_hand panda_rightfinger 10"/>
- 
-
+  
 </launch>
